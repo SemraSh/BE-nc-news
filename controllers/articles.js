@@ -44,7 +44,6 @@ const updateVotes = (req, res) => {
 
   Articles.findByIdAndUpdate({ _id: req.params.article_id }, { $inc: { votes: vote } }).lean()
     .then(article => {
-      console.log(article)
       article.votes += vote
       res.json(article)
     }).catch(console.error)

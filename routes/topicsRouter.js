@@ -4,6 +4,6 @@ const {getArticlesByTopic, addNewArticle} = require('../controllers/articles')
 
 router.get('/', getAllTopics);
 router.get('/:topic/articles', getArticlesByTopic);
-router.post('/:topic', addNewArticle)
+router.post('/:topic/articles', addNewArticle);
 
 module.exports = router;
