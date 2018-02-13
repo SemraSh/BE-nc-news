@@ -14,13 +14,13 @@ describe('Articles', () => {
 			.then(() => mongoose.connection.dropDatabase())
 			.then(saveTestData)
 			.then(savedData => {
-				data = savedData
-				return data
+				data = savedData;
+				return data;
 			});
 	});
 	after((done) => {
-		mongoose.disconnect()
-		done()
+		mongoose.disconnect();
+		done();
 	});
 
 	it('"GET /articles" returns an array of all topics and status code 200', () => {
@@ -36,17 +36,17 @@ describe('Articles', () => {
 	});
 
 	it('"GET /articles/:article_id" returns an object with values of the requested article', () => {
-		const articleId = data.articles[0]._id
+		const articleId = data.articles[0]._id;
 		return request
 			.get(`/articles/${articleId}`)
 			.expect(200)
 			.then(res => {
-				const article = res.body
-				expect(article).to.be.an('object')
-				expect(article._id).to.equal(`${articleId}`)
-				expect(article.belongs_to).to.equal('cats')
-				expect(article.body.length).to.be.at.least(1)
-				expect(article.title.length).to.be.at.least(1)
+				const article = res.body;
+				expect(article).to.be.an('object');
+				expect(article._id).to.equal(`${articleId}`);
+				expect(article.belongs_to).to.equal('cats');
+				expect(article.body.length).to.be.at.least(1);
+				expect(article.title.length).to.be.at.least(1);
 			});
 	});
 
