@@ -1,3 +1,4 @@
+require('dotenv').config();
 const app = require('express')();
 const apiRouter = require('./routes/apiRouter');
 const bodyParser = require('body-parser');
@@ -7,7 +8,6 @@ if(process.env.NODE_ENV === 'test') db = process.env.DB_URL_TEST;
 else db = process.env.DB_URL;
 
 mongoose.connect(db);
-
 app.use(bodyParser.json());
 app.use('/', apiRouter);
 app.use((err, req, res, next) => {

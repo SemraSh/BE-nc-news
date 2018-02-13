@@ -6,7 +6,7 @@ const mongoose = require('mongoose');
 const db = process.env.DB_URL_TEST;
 mongoose.Promise = Promise;
 
-describe('Topics', () => {
+describe('Articles', () => {
 	before(() => {
 		const p = mongoose.connection.readyState === 0 ? mongoose.connect(db) : Promise.resolve();
 		return p
@@ -22,15 +22,15 @@ describe('Topics', () => {
 		mongoose.connection.close();
 		done();
 	});
-	it('"GET /topics" gets all the topics', () => {
+	it('"GET /articles" gets all the articles', () => {
 		return request
-			.get('/topics')
+			.get('/articles')
 			.expect(200)
 			.then(res => {
-				let topics = res.body;
-				expect(topics).to.be.an('array');
-				expect(topics.length).to.equal(3);
-				expect(topics[0].title).to.equal('Football');
+				let articles = res.body;
+				expect(articles).to.be.an('array');
+				expect(articles.length).to.equal(2);
+				expect(Object.keys(articles[0])).to.eql(['votes', '_id', 'title', 'body', 'belongs_to', '__v']);
 			});
 	});
 });
