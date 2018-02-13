@@ -7,30 +7,47 @@ const db = process.env.DB_URL_TEST;
 mongoose.Promise = Promise;
 
 describe('Articles', () => {
+	let data = {};
 	before(() => {
-		const p = mongoose.connection.readyState === 0 ? mongoose.connect(db) : Promise.resolve();
-		return p
-			.then(() => {
-				return mongoose.connection.dropDatabase();
-			})
+		const checkConnection = mongoose.connection.readyState === 0 ? mongoose.connect(db) : Promise.resolve();
+		return checkConnection
+			.then(() => mongoose.connection.dropDatabase())
 			.then(saveTestData)
 			.then(savedData => {
-				data = savedData;
+				data = savedData
+				return data
 			});
 	});
-	after(done => {
-		mongoose.connection.close();
-		done();
+	after((done) => {
+		mongoose.disconnect()
+		done()
 	});
-	it('"GET /articles" gets all the articles', () => {
+
+	it('"GET /articles" returns an array of all topics and status code 200', () => {
 		return request
 			.get('/articles')
 			.expect(200)
 			.then(res => {
-				let articles = res.body;
+				const articles = res.body;
 				expect(articles).to.be.an('array');
 				expect(articles.length).to.equal(2);
 				expect(Object.keys(articles[0])).to.eql(['votes', '_id', 'title', 'body', 'belongs_to', '__v']);
 			});
 	});
+
+	it('"GET /articles/:article_id" returns an object with values of the requested article', () => {
+		const articleId = data.articles[0]._id
+		return request
+			.get(`/articles/${articleId}`)
+			.expect(200)
+			.then(res => {
+				const article = res.body
+				expect(article).to.be.an('object')
+				expect(article._id).to.equal(`${articleId}`)
+				expect(article.belongs_to).to.equal('cats')
+				expect(article.body.length).to.be.at.least(1)
+				expect(article.title.length).to.be.at.least(1)
+			});
+	});
+
 });
