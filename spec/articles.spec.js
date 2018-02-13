@@ -18,7 +18,7 @@ describe('Articles', () => {
 				return data;
 			});
 	});
-	after((done) => {
+	after(done => {
 		mongoose.disconnect();
 		done();
 	});
@@ -35,7 +35,7 @@ describe('Articles', () => {
 			});
 	});
 
-	it('"GET /articles/:article_id" returns an object with values of the requested article', () => {
+	it('"GET /articles/:article_id" returns an object with values of the requested article and status code 200', () => {
 		const articleId = data.articles[0]._id;
 		return request
 			.get(`/articles/${articleId}`)
@@ -49,5 +49,27 @@ describe('Articles', () => {
 				expect(article.title.length).to.be.at.least(1);
 			});
 	});
-
+	it('"PUT /articles/:article_id?vote=up" increases the vote count by one', () => {
+		const articleId = data.articles[0]._id;
+		return request
+			.put(`/articles/${articleId}?vote=up`)
+			.expect(200)
+			.then(res => {
+				const article = res.body;
+				expect(article._id).to.equal(`${articleId}`);
+				expect(article.votes).to.equal(1);
+			});
+	});
+	it('"PUT /articles/:article_id?vote=down" decreases the vote count by one', () => {
+		const articleId = data.articles[1]._id;
+		return request
+			.put(`/articles/${articleId}?vote=down`)
+			.expect(200)
+			.then(res => {
+				const article = res.body;
+				expect(article._id).to.equal(`${articleId}`);
+				expect(article.votes).to.equal(-1);
+			});
+	});
+	
 });
