@@ -8,20 +8,16 @@ mongoose.Promise = Promise;
 
 describe('Topics', () => {
 	before(() => {
-		const p = mongoose.connection.readyState === 0 ? mongoose.connect(db) : Promise.resolve();
-		return p
+		const checkConnection = mongoose.connection.readyState === 0 ? mongoose.connect(db) : Promise.resolve();
+		return checkConnection
 			.then(() => {
 				return mongoose.connection.dropDatabase();
 			})
 			.then(saveTestData)
-			.then(savedData => {
-				data = savedData;
-			});
+			.then(savedData => savedData);
 	});
-	after(done => {
-		mongoose.connection.close();
-		done();
-	});
+	after(done => { mongoose.disconnect(), done(); });
+
 	it('"GET /topics" gets all the topics', () => {
 		return request
 			.get('/topics')
