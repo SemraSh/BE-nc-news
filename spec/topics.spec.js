@@ -45,13 +45,14 @@ describe('Topics', () => {
 				expect(Object.keys(articlesByTopic[0]).length).to.equal(6);
 			});
 	});
-	it('"POST /topics/:topic/articles" creates a new article under the requested topic', ()=>{
+	it('"POST /topics/:topic/articles" creates a new article under the requested topic', () => {
 		const topic = data.topics[1].slug;
-		const article = {		
+		const article = {
 			belongs_to: topic,
 			title: 'Test article',
-			body: 'This is a test article' ,
-			created_by: 'creator'};
+			body: 'This is a test article',
+			created_by: 'creator'
+		};
 		return request
 			.post(`/topics/${topic}/articles`)
 			.send(article)
