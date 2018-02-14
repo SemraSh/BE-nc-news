@@ -9,7 +9,7 @@ const getAllComments = (req, res) => {
 };
 
 const getCommentById = (req, res, next) => {
-	Comments.findById({ _id: req.params.comment_id })
+	Comments.findById(req.params.comment_id)
 		.then(comment => res.status(200).json(comment))
 		.catch((err) => next(err));
 };
@@ -36,7 +36,7 @@ const voteComment = (req, res) => {
 	let vote = 0;
 	if (req.query.vote === 'up') vote++;
 	else if (req.query.vote === 'down') vote--;
-	Comments.findByIdAndUpdate({ _id: req.params.comment_id }, { $inc: { votes: vote } }).lean()
+	Comments.findByIdAndUpdate(req.params.comment_id, { $inc: { votes: vote } }).lean()
 		.then(comment => {
 			comment.votes += vote;
 			res.json(comment);
@@ -45,9 +45,9 @@ const voteComment = (req, res) => {
 
 
 const deleteComment = (req, res) => {
-	Comments.findByIdAndRemove({ _id: req.params.comment_id })
-		.then(() => Comments.find())
-		.then(comments => res.json(comments))
+	const {comment_id} = req.params
+	Comments.findByIdAndRemove(comment_id)
+		.then(message => res.json({message: `comment ${comment_id} deleted`}))
 		.catch(console.error);
 };
 
