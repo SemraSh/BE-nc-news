@@ -2,14 +2,10 @@ const mongoose = require('mongoose');
 mongoose.Promise = Promise;
 const { Topics} = require('../models/models.js');
 
-const getAllTopics = (req, res) => {
+const getAllTopics = (req, res, next ) => {
 	Topics.find()
-		.then(topics => {
-			res.status(200).json(topics);
-		}).catch(err=>{
-			if(err === 404) console.log('Not found!');
-			else console.log('All topics fetched');
-		});
+		.then(topics => res.status(200).json(topics))
+		.catch(err => next(err))
 };
 
 
