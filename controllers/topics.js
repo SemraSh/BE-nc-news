@@ -7,8 +7,8 @@ const getAllTopics = (req, res) => {
 		.then(topics => {
 			res.status(200).json(topics);
 		}).catch(err=>{
-			if(err === 404) console.log('Not found!')
-			else console.log('All topics fetched')
+			if(err === 404) console.log('Not found!');
+			else console.log('All topics fetched');
 		});
 };
 

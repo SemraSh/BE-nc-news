@@ -10,7 +10,7 @@ else db = process.env.DB_URL;
 mongoose.connect(db);
 app.use(bodyParser.json());
 app.use('/', apiRouter);
-app.use((err, req, res, next) => {
+app.use((err, req, res) => {
 	if(err.name === 'CastError')
 		res.status(404).send({error: err.message});
 	if(err.name === 'ValidationError') 

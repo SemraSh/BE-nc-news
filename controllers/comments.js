@@ -45,11 +45,11 @@ const voteComment = (req, res) => {
 
 
 const deleteComment = (req, res) => {
-	const {comment_id} = req.params
+	const {comment_id} = req.params;
 	Comments.findByIdAndRemove(comment_id)
 		.then(message => res.json({message: `comment ${comment_id} deleted`}))
 		.catch(console.error);
 };
 
 
-module.exports = { getCommentsByArticle, getCommentById, addNewComment, voteComment, deleteComment, getAllComments };
+module.exports = {getAllComments, getCommentsByArticle, getCommentById, addNewComment, voteComment, deleteComment};

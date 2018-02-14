@@ -9,7 +9,7 @@ const getAllUsers = (req, res) => {
 };
 
 const getUserByUsername = (req, res) => {
-	Users.findOne({username: req.params.user_id})
+	Users.findOne({username: req.params.username})
 		.then(user => res.status(200).json(user))
 		.catch(console.error);
 };
