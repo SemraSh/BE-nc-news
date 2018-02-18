@@ -1,6 +1,6 @@
 require('dotenv').config();
 const app = require('express')();
-const apiRouter = require('./routes/apiRouter');
+const router = require('./routes/router');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 let db;
@@ -9,12 +9,10 @@ else db = process.env.DB_URL;
 
 mongoose.connect(db);
 app.use(bodyParser.json());
-app.use('/', apiRouter);
-app.use((err, req, res) => {
-	if(err.name === 'CastError')
-		res.status(404).send({error: err.message});
-	if(err.name === 'ValidationError') 
-		res.status(422).send({error: err.message});
+app.use('/', router);
+app.use((err, req, res, next) => {
+	res.status(err.status || 500).json({error: {code: err.status, message: err.message}});
+	next();
 });
 
 module.exports = app;
