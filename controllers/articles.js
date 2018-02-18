@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 mongoose.Promise = Promise;
 const { Articles } = require('../models/models');
-const { ObjectId } = require('mongoose').Types
+const { ObjectId } = require('mongoose').Types;
 
 const getAllArticles = (req, res, next) => {
 	if (!req.query.page || typeof +req.query.page !== 'number') {
@@ -9,7 +9,7 @@ const getAllArticles = (req, res, next) => {
 		err.statusCode = 400;
 		next(err);
 	}
-	const page = +req.query.page || 1
+	const page = +req.query.page || 1;
 	Articles.paginate({}, { page, limit: 10 })
 		.then(articles => {
 			if (articles.pages < page) {
@@ -24,9 +24,9 @@ const getAllArticles = (req, res, next) => {
 
 const getArticleById = (req, res, next) => {
 	if (!ObjectId.isValid(req.params.article_id)) {
-		const err = new Error(`Article id: ${req.params.article_id} is not valid!`)
-		err.status = 400
-		next(err)
+		const err = new Error(`Article id: ${req.params.article_id} is not valid!`);
+		err.status = 400;
+		next(err);
 	} else {
 		Articles.findById(req.params.article_id)
 			.then(article => {
@@ -52,7 +52,7 @@ const updateVotes = (req, res, next) => {
 		.then(article => {
 			article.votes += vote;
 			res.json(article);
-		}).catch(next)
+		}).catch(next);
 };
 
 
