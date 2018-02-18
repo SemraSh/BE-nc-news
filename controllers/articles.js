@@ -14,7 +14,7 @@ const getAllArticles = (req, res, next) => {
 		.then(articles => {
 			if (articles.pages < page) {
 				const err = new Error('Not Found!');
-				err.status = 404; 
+				err.status = 404;
 				next(err);
 			} else {
 				res.status(200).json(articles);
@@ -36,19 +36,6 @@ const getArticleById = (req, res, next) => {
 };
 
 
-const addNewArticle = (req, res, next) => {
-	const { belongs_to, title, body, created_by } = req.body;
-	const article = new Articles({
-		belongs_to,
-		title,
-		body,
-		created_by
-	});
-	article.save()
-		.then(article => res.status(201).json(article))
-		.catch(next);
-};
-
 const updateVotes = (req, res, next) => {
 	//console.log(req)
 	if (!req.query.vote || req.query !== 'up' || req.query !== 'down') {
@@ -69,4 +56,4 @@ const updateVotes = (req, res, next) => {
 };
 
 
-module.exports = { getAllArticles, getArticleById, addNewArticle, updateVotes };
+module.exports = { getAllArticles, getArticleById, updateVotes };
