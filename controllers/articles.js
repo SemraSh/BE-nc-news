@@ -5,7 +5,7 @@ const { ObjectId } = require('mongoose').Types;
 
 const getAllArticles = (req, res, next) => {
 	if (!req.query.page || typeof +req.query.page !== 'number') {
-		const err = new Error('Please provide a query in the format page=1');
+		const err = new Error("Please provide a query in the format 'page=1'");
 		err.statusCode = 400;
 		next(err);
 	}
@@ -37,7 +37,6 @@ const getArticleById = (req, res, next) => {
 
 
 const updateVotes = (req, res, next) => {
-	//console.log(req)
 	if (!req.query.vote || req.query !== 'up' || req.query !== 'down') {
 		const err = new Error('Please provide a query in the format vote=up or vote=down');
 		err.statusCode = 400;
