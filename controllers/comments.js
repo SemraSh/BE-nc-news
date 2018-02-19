@@ -1,25 +1,42 @@
 const mongoose = require('mongoose');
-const { Comments } = require('../models/models');
 mongoose.Promise = Promise;
+const { Comments } = require('../models/models');
+const { ObjectId } = require('mongoose').Types;
 
 const getAllComments = (req, res) => {
 	Comments.find()
 		.then(comments => res.status(200).json(comments))
-		.catch(console.error);
+		.catch(next);
 };
 
 const getCommentById = (req, res, next) => {
-	Comments.findById(req.params.comment_id)
-		.then(comment => res.status(200).json(comment))
-		.catch((err) => next(err));
-};
+	const { comment_id } = req.params
+	if (!ObjectId.isValid(comment_id)) {
+		const err = new Error(`Comment id is not valid!`);
+		err.status = 400;
+		next(err);
+	} else {
+		Comments.findById(comment_id)
+			.then(comment => res.status(200).json(comment))
+			.catch(next);
+	}
+}
 
 const getCommentsByArticle = (req, res) => {
+
 	Comments.find({ belongs_to: req.params.article_id })
 		.then(comments => {
-			res.status(200).json(comments);
-		}).catch(console.error);
+			if (!comments) {
+					const err = new Error("Article doesn't exist");
+					err.status = 400;
+					next(err);
+				} else {
+					res.status(200).json(comments)
+						.catch(next);
+				}
+		})
 };
+
 
 const addNewComment = (req, res) => {
 	const { belongs_to, body } = req.body;
@@ -29,7 +46,7 @@ const addNewComment = (req, res) => {
 	});
 	comment.save()
 		.then(comment => res.status(201).json(comment))
-		.catch(console.error);
+		.catch(next);
 };
 
 const voteComment = (req, res) => {
@@ -40,16 +57,16 @@ const voteComment = (req, res) => {
 		.then(comment => {
 			comment.votes += vote;
 			res.json(comment);
-		}).catch(console.error);
+		}).catch(next);
 };
 
 
 const deleteComment = (req, res) => {
-	const {comment_id} = req.params;
+	const { comment_id } = req.params;
 	Comments.findByIdAndRemove(comment_id)
-		.then(message => res.json({message: `comment ${comment_id} deleted`}))
-		.catch(console.error);
+		.then(message => res.json({ message: `comment ${comment_id} deleted` }))
+		.catch(next);
 };
 
 
-module.exports = {getAllComments, getCommentsByArticle, getCommentById, addNewComment, voteComment, deleteComment};
+module.exports = { getAllComments, getCommentsByArticle, getCommentById, addNewComment, voteComment, deleteComment };

@@ -12,7 +12,7 @@ const getArticlesByTopic = (req, res, next) => {
 	Articles.find({ belongs_to: req.params.topic })
 		.then(articles => {
 			if (!articles.length) {
-				const err = new Error('There is no such topic');
+				const err = new Error("Topic doesn't exist");
 				err.status = 400;
 				next(err);
 			} else res.status(200).json(articles);

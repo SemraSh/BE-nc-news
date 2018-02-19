@@ -6,29 +6,31 @@ const { ObjectId } = require('mongoose').Types;
 const getAllArticles = (req, res, next) => {
 	if (!req.query.page || typeof +req.query.page !== 'number') {
 		const err = new Error("Please provide a query in the format 'page=1'");
-		err.statusCode = 400;
-		next(err);
-	}
-	const page = +req.query.page || 1;
-	Articles.paginate({}, { page, limit: 10 })
-		.then(articles => {
-			if (articles.pages < page) {
-				const err = new Error('Not Found!');
-				err.status = 404;
-				next(err);
-			} else {
-				res.status(200).json(articles);
-			}
-		}).catch(next);
-};
-
-const getArticleById = (req, res, next) => {
-	if (!ObjectId.isValid(req.params.article_id)) {
-		const err = new Error(`Article id: ${req.params.article_id} is not valid!`);
 		err.status = 400;
 		next(err);
 	} else {
-		Articles.findById(req.params.article_id)
+		const page = +req.query.page || 1;
+		Articles.paginate({}, { page, limit: 10 })
+			.then(articles => {
+				if (articles.pages < page) {
+					const err = new Error('Not Found!');
+					err.status = 404;
+					next(err);
+				} else {
+					res.status(200).json(articles);
+				}
+			}).catch(next);
+	}
+};
+
+const getArticleById = (req, res, next) => {
+	const { article_id } = req.params
+	if (!ObjectId.isValid(article_id)) {
+		const err = new Error(`Article id is not valid!`);
+		err.status = 400;
+		next(err);
+	} else {
+		Articles.findById(article_id)
 			.then(article => {
 				res.status(200).json(article);
 			}).catch(next);
@@ -37,21 +39,22 @@ const getArticleById = (req, res, next) => {
 
 
 const updateVotes = (req, res, next) => {
-	if (!req.query.vote || req.query !== 'up' || req.query !== 'down') {
+	const { vote } = req.query
+	if (vote === 'up' || vote === 'down') {
+		let addVote = 0;
+		if (vote === 'up') addVote++;
+		else if (vote === 'down') addVote--;
+		Articles.findByIdAndUpdate({ _id: req.params.article_id }, { $inc: { votes: addVote } }).lean()
+			.then(article => {
+				article.votes += addVote;
+				res.json(article);
+			}).catch(next);
+	}
+	else {
 		const err = new Error('Please provide a query in the format vote=up or vote=down');
-		err.statusCode = 400;
+		err.status = 400;
 		next(err);
 	}
-	let vote = 0;
-
-	if (req.query.vote === 'up') vote++;
-	else if (req.query.vote === 'down') vote--;
-
-	Articles.findByIdAndUpdate({ _id: req.params.article_id }, { $inc: { votes: vote } }).lean()
-		.then(article => {
-			article.votes += vote;
-			res.json(article);
-		}).catch(next);
 };
 
 
