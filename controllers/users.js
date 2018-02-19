@@ -9,18 +9,18 @@ const getAllUsers = (req, res, next) => {
 };
 
 const getUserByUsername = (req, res, next) => {
-	const { username } = req.params
+	const { username } = req.params;
 	Users.findOne({ username })
 		.then(user => {
 			if (!user) {
-				const err = new Error(`User ${username} doesn't exist`)
-				err.status = 400
-				next(err)
+				const err = new Error(`User ${username} doesn't exist`);
+				err.status = 400;
+				next(err);
 			} else {
 				res.status(200).json(user)
 					.catch(next);
 			}
-		})
+		});
 };
 
 
