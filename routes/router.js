@@ -9,7 +9,7 @@ router.use('/articles', articlesRouter);
 router.use('/comments', commentsRouter);
 router.use('/users', usersRouter);
 router.route('/')
-	.get((req, res) => res.status(200).json({ status: 200, message: 'Working' }))
+	.get((req, res) => res.status(200).sendFile('index.html', {root: '.'}))
 router.use('/*', (req, res, next) => {
 	const err = new Error('Page not found! Invalid Path!');
 	err.status = 404;

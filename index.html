@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Northcoders News Backend</title>
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Open Sans';
+      margin: 30px 60px 60px
+    }
+
+    h3 span {
+      background-color: rgb(230, 230, 230)
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Northcoders News</h1>
+  <h1>API endpoints</h1>
+  <p>Use one of the following endpoints to get response in a JSON format for the requested path.</p>
+  <h4>Use this chrome extension
+    <a href='https://chrome.google.com/webstore/detail/json-viewer/gbmdgpbipfallnflgajpaliibnhdgobh' target="_blank">JSON viewer</a> to see the JSON responses in a pretty format.</h4>
+  <h2>GET </h2>
+  <hr>
+  <div>
+    <h3>
+      <span>/topics</span>
+    </h3>
+    <small>Get all the topics</small>
+
+    <h3>
+      <span>topics/:topic/articles</span>
+    </h3>
+    <small>Get article by topic name</small>
+
+    <h3>
+      <span>/articles?page=1</span>
+    </h3>
+    <small>Get first 10 articles. Increase the page number by 1 to get the next 10 articles</small>
+
+    <h3>
+      <span>/articles/:article_id</span>
+    </h3>
+    <small>Get article by article id.</small>
+
+    <h3>
+      <span>/articles/:article_id/comments</span>
+    </h3>
+    <small>Get all comments for one article.</small>
+
+    <h3>
+      <span>/users</span>
+    </h3>
+    <small>Get all the users</small>
+
+    <h3>
+      <span>/users/:username</span>
+    </h3>
+    <small>Get user by user name.</small>
+
+    <h3>
+      <span>/comments</span>
+    </h3>
+    <small>Get all the comments</small>
+
+    <h3>
+      <span>/comments/:comment_id</span>
+    </h3>
+    <small>Get one comment by comment id.</small>
+
+
+    <h2>POST </h2>
+    <hr>
+    <div>
+      <h3>
+        <span>/topics/:topic/articles</span>
+      </h3>
+      <small>Post a new article under the topic</small>
+
+      <h3>
+        <span>/articles/:article_id/comments</span>
+      </h3>
+      <small>Post new comment for the article. </small>
+
+      <h2>PUT </h2>
+      <hr>
+      <h3>
+        <span>/articles/:article_id</span>
+      </h3>
+      <small>Update vote for article.</small>
+
+      <h3>
+        <span>/comments/:comment_id</span>
+      </h3>
+      <small>Update vote of the comment.</small>
+
+
+      <h2>DELETE</h2>
+      <hr>
+      <h3>
+        <span>/comments/:comment_id</span>
+      </h3>
+      <small>Delete comment.</small>
+
+    </div>
+</body>
+
+</html>
