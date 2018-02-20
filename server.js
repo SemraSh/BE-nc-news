@@ -6,6 +6,8 @@ const db = require('./config').DB[process.env.NODE_ENV] || process.env.DB;
 mongoose.Promise = Promise;
 
 mongoose.connect(db)
+	.then(()=>console.log('connected to', db))
+
 app.use(bodyParser.json());
 app.use('/', router);
 app.use((err, req, res, next) => {
