@@ -3,7 +3,7 @@ const app = require('express')();
 const router = require('./routes/router');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
-const db = require('./config').DB[process.env.NODE_ENV];
+const db = require('./config').DB[process.env.NODE_ENV] || process.env.DB;
 mongoose.Promise = Promise;
 console.log(db);
 mongoose.connect(db)
