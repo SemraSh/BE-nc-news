@@ -8,26 +8,29 @@
   <title>Northcoders News Backend</title>
   <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
   <style>
-    body {
-      font-family: 'Open Sans';
-      margin: 30px 60px 60px
-    }
-
-    h3 span {
-      background-color: rgb(230, 230, 230)
-    }
+    body { margin: 0px; font-family: 'Open Sans'}
+    header {background-color: rgb(255, 236, 196); padding: 20px 30px 30px 60px}
+    h1 {display: inline; font-weight: bold}
+    h1 span {color: rgb(193, 0, 46)}
+    h3 span {background-color: rgb(230, 230, 230)}
+    div {margin: 0px 60px 60px}
+    img {   position: relative; bottom: -20px;}
   </style>
 </head>
 
 <body>
-  <h1>Northcoders News</h1>
-  <h1>API endpoints</h1>
-  <p>Use one of the following endpoints to get response in a JSON format for the requested path.</p>
-  <h4>Use this chrome extension
-    <a href='https://chrome.google.com/webstore/detail/json-viewer/gbmdgpbipfallnflgajpaliibnhdgobh' target="_blank">JSON viewer</a> to see the JSON responses in a pretty format.</h4>
+  <header>
+    <img src="https://sse.ac.in/assets/images/megaphone-512.png" height="62" width="62">
+    <h1><span>Northcoders</span> News |</h1>
+    <h1>API endpoints</h1>
+    <p>Use one of the following endpoints to get response in a JSON format for the requested path.</p>
+    <h4>Use this chrome extension
+      <a href='https://chrome.google.com/webstore/detail/json-viewer/gbmdgpbipfallnflgajpaliibnhdgobh' target="_blank">JSON viewer</a> to see the JSON responses in a pretty format.</h4>
+  </header>
+  <div>
   <h2>GET </h2>
   <hr>
-  <div>
+  
     <h3>
       <span>/topics</span>
     </h3>
@@ -76,7 +79,6 @@
 
     <h2>POST </h2>
     <hr>
-    <div>
       <h3>
         <span>/topics/:topic/articles</span>
       </h3>
