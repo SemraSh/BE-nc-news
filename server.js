@@ -1,3 +1,4 @@
+if (!process.env.NODE_ENV) process.env.NODE_ENV = 'dev'
 const app = require('express')();
 const router = require('./routes/router');
 const bodyParser = require('body-parser');
@@ -6,7 +7,7 @@ const db = require('./config').DB[process.env.NODE_ENV] || process.env.DB;
 mongoose.Promise = Promise;
 
 mongoose.connect(db)
-	.then(()=>console.log('connected to', db))
+	.then(() => console.log('connected to', db))
 
 app.use(bodyParser.json());
 app.use('/', router);
