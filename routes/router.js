@@ -8,13 +8,12 @@ router.use('/topics', topicsRouter);
 router.use('/articles', articlesRouter);
 router.use('/comments', commentsRouter);
 router.use('/users', usersRouter);
-router.use('/', ()=>{
-	res.status(200).json({ status: 200, message: 'Working'})
-})
+router.route('/')
+	.get((req, res) => res.status(200).json({ status: 200, message: 'Working' }))
 router.use('/*', (req, res, next) => {
 	const err = new Error('Page not found! Invalid Path!');
 	err.status = 404;
-	res.status(err.status).json({error: {status: err.status, message: err.message}});
+	res.status(err.status).json({ error: { status: err.status, message: err.message } });
 	next();
 });
 
