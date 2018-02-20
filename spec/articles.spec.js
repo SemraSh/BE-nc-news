@@ -3,14 +3,13 @@ const { expect } = require('chai');
 const app = require('../server');
 const request = require('supertest')(app);
 const mongoose = require('mongoose');
-const db = process.env.DB_URL_TEST;
 mongoose.Promise = Promise;
 
 describe('Articles', () => {
 	let data = {};
 	before(() => {
-		const checkConnection = mongoose.connection.readyState === 0 ? mongoose.connect(db) : Promise.resolve();
-		return checkConnection
+		const p = mongoose.connection.readyState === 0 ? mongoose.connect(db) : Promise.resolve();
+		return p
 			.then(() => mongoose.connection.dropDatabase())
 			.then(saveTestData)
 			.then(savedData => {
@@ -18,17 +17,13 @@ describe('Articles', () => {
 				return data;
 			});
 	});
-	after(done => {
-		mongoose.disconnect();
-		done();
-	});
 
 	it('"GET /articles" returns an array of all topics and status code 200', () => {
 		return request
-			.get('/articles')
+			.get('/articles?page=1')
 			.expect(200)
 			.then(res => {
-				const articles = res.body;
+				const articles = res.body.docs;
 				expect(articles).to.be.an('array');
 				expect(articles.length).to.equal(2);
 				expect(Object.keys(articles[0])).to.eql(['votes', '_id', 'title', 'body', 'belongs_to', '__v']);

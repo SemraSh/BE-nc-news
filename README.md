@@ -3,6 +3,7 @@ About
 A RESTful API for Northcoders News. Built using Node.js (v8.9.1), Express.js (v4.16.2), MongoDB (v3.4.9) and Mongoose(v5.0.1).
  
 This API has been deployed to Heroku here.
+https://nc--news.herokuapp.com/
 
 Set Up
 To check if Node.js is installed on your machine open a terminal window and enter:

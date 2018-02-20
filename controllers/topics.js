@@ -48,7 +48,9 @@ const addNewArticle = (req, res, next) => {
 		.then(validation => {
 			const topicIsValid = validation[0];
 			const userIsValid = validation[1];
-
+			
+			console.log(userIsValid)
+			console.log(topicIsValid)
 			if (!topicIsValid) {
 				const err = new Error('\'belongs_to\' should be a valid topic');
 				err.status = 400;

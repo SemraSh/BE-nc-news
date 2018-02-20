@@ -9,18 +9,14 @@ mongoose.Promise = Promise;
 describe('Comments', () => {
 	let data = {};
 	before(() => {
-		const checkConnection = mongoose.connection.readyState === 0 ? mongoose.connect(db) : Promise.resolve();
-		return checkConnection
+		const p = mongoose.connection.readyState === 0 ? mongoose.connect(db) : Promise.resolve();
+		return p
 			.then(() => mongoose.connection.dropDatabase())
 			.then(saveTestData)
 			.then(savedData => {
 				data = savedData;
 				return data;
 			});
-	});
-	after(done => {
-		mongoose.disconnect();
-		done();
 	});
 
 	it('"GET /comments" returns all the comments', ()=>{

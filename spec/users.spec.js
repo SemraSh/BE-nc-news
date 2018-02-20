@@ -9,8 +9,8 @@ mongoose.Promise = Promise;
 describe('Users', () => {
 	let data = {};
 	before(() => {
-		const checkConnection = mongoose.connection.readyState === 0 ? mongoose.connect(db) : Promise.resolve();
-		return checkConnection
+		const p = mongoose.connection.readyState === 0 ? mongoose.connect(db) : Promise.resolve();
+		return p
 			.then(() => mongoose.connection.dropDatabase())
 			.then(saveTestData)
 			.then(savedData => {

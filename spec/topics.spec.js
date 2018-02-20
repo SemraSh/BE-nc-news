@@ -9,18 +9,15 @@ mongoose.Promise = Promise;
 describe('Topics', () => {
 	let data;
 	before(() => {
-		const checkConnection = mongoose.connection.readyState === 0 ? mongoose.connect(db) : Promise.resolve();
-		return checkConnection
-			.then(() => {
-				return mongoose.connection.dropDatabase();
-			})
+		const p = mongoose.connection.readyState === 0 ? mongoose.connect(db) : Promise.resolve();
+		return p
+			.then(() => mongoose.connection.dropDatabase())
 			.then(saveTestData)
 			.then(savedData => {
 				data = savedData;
 				return data;
 			});
 	});
-	after(done => { mongoose.disconnect(), done(); });
 
 	it('"GET /topics" gets all the topics', () => {
 		return request
@@ -30,7 +27,6 @@ describe('Topics', () => {
 				let topics = res.body;
 				expect(topics).to.be.an('array');
 				expect(topics.length).to.equal(3);
-				expect(topics[0].title).to.equal('Football');
 			});
 	});
 	it('"GET /topics/:topic/articles/" returns all the articles for one topic', () => {
@@ -58,6 +54,7 @@ describe('Topics', () => {
 			.send(article)
 			.expect(201)
 			.then(res => {
+				console.log(res)
 				const newArticle = res.body;
 				expect(newArticle.title).to.equal(article.title);
 				expect(newArticle.body).to.equal(article.body);
