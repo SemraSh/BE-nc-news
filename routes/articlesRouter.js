@@ -1,6 +1,6 @@
 const router = require('express').Router();
-const { getAllArticles, getArticleById, updateVotes } = require('../controllers/articles.js');
-const { getCommentsByArticle, addNewComment } = require('../controllers/comments');
+const { getAllArticles, getArticleById, updateVotes, addNewComment  } = require('../controllers/articles.js');
+const { getCommentsByArticle} = require('../controllers/comments');
 
 router.get( '/', getAllArticles );
 router.get( '/:article_id', getArticleById );

@@ -12,7 +12,7 @@ const getArticlesByTopic = (req, res, next) => {
 	Articles.find({ belongs_to: req.params.topic })
 		.then(articles => {
 			if (!articles.length) {
-				const err = new Error("Topic doesn't exist");
+				const err = new Error('Topic doesn\'t exist');
 				err.status = 400;
 				next(err);
 			} else res.status(200).json(articles);
@@ -46,7 +46,8 @@ const addNewArticle = (req, res, next) => {
 
 	Promise.all([checkTopic(belongs_to), checkUser(created_by)])
 		.then(validation => {
-			[topicIsValid, userIsValid] = validation;
+			const topicIsValid = validation[0];
+			const userIsValid = validation[1];
 
 			if (!topicIsValid) {
 				const err = new Error('\'belongs_to\' should be a valid topic');
