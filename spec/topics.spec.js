@@ -47,7 +47,7 @@ describe('Topics', () => {
 			belongs_to: topic,
 			title: 'Test article',
 			body: 'This is a test article',
-			created_by: 'creator'
+			created_by: ''
 		};
 		return request
 			.post(`/topics/${topic}/articles`)

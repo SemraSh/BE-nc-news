@@ -4,7 +4,7 @@ module.exports = {
     test: 'mongodb://localhost/northcoders-news-api-test'
   },
   PORT: {
-    dev: 3000,
+    dev: process.env.PORT || 3000,
     test: 3090
   }
 };
