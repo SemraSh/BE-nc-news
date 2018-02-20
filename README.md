@@ -1,7 +1,7 @@
 Northcoders News API
 About
-A RESTful API for Northcoders News, a news aggregation site. Built using Node.js (v8.6.0), Express.js (v4.14.0), MongoDB (v3.4.9) and Mongoose(v.4.7.0).
-
+A RESTful API for Northcoders News. Built using Node.js (v8.9.1), Express.js (v4.16.2), MongoDB (v3.4.9) and Mongoose(v5.0.1).
+ 
 This API has been deployed to Heroku here.
 
 Set Up
