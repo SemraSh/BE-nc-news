@@ -77,7 +77,7 @@ Testing was carried out using `Mocha`, `Chai` and `Supertest`
 Get all the topics
 
 ```
-topics/:topic/articles
+/topics/:topic/articles
 ```
 Get article by topic name
 
