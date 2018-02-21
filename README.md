@@ -1,6 +1,6 @@
 ## Northcoders News API
 ### About
-A RESTful API for Northcoders News. Built using Node.js (v8.9.1), Express.js (v4.16.2), MongoDB (v3.4.9) and Mongoose(v5.0.1).
+A RESTful API for Northcoders News. Built using Node.js (v8.9.1), Express.js (v4.16.2), MongoDB (v5.6.0) and Mongoose(v5.0.1).
  
 This API has been deployed to Heroku [here](https://nc--news.herokuapp.com/).
 
@@ -27,10 +27,17 @@ git --version
 
 Check if `MongoDB` is installed on your machine enter the following command on your terminal:
 ```
-npm list mongoose
+npm -v MongoDB
 ```
 
 >If you do not have `MongoDB` already installed, please follow [this guide](https://docs.mongodb.com/manual/installation/).
+
+Check if `mongoose` is installed on your machine enter the following command on your terminal:
+```
+npm list mongoose
+```
+
+>If you do not have `mongoose` already installed, please follow [this guide](https://www.npmjs.com/package/mongoose).
 
 
 ### Installation
