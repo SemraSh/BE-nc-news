@@ -25,7 +25,12 @@ git --version
 ```
 >If you do not already have git installed on your machine please follow [this guide](https://git-scm.com/).
 
-If you do not have `MongoDB` already installed, please follow [this guide](https://docs.mongodb.com/manual/installation/).
+Check if `MongoDB` is installed on your machine enter the following command on your terminal:
+```
+npm list mongoose
+```
+
+>If you do not have `MongoDB` already installed, please follow [this guide](https://docs.mongodb.com/manual/installation/).
 
 
 ### Installation
