@@ -67,9 +67,10 @@ npm test
 Testing was carried out using `Mocha`, `Chai` and `Supertest`
 
 ### API routes
+-----
 
 #### GET
-=====
+
 ```
 /topics
 ```
@@ -115,9 +116,8 @@ Get all the comments
 ```
 Get one comment by comment id.
 
-
+-----
 #### POST
---------
 ```
 /topics/:topic/articles
 ```
@@ -129,8 +129,8 @@ Post a new article under the topic
 Post new comment for the article.
 
 
-#### PUT
 -------
+#### PUT
 ```
 /articles/:article_id
 ```
@@ -141,7 +141,7 @@ Update vote for article.
 ```
 Update vote of the comment.
 
-
+-------
 #### DELETE
 ```
 /comments/:comment_id
