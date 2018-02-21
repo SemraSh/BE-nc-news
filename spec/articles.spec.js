@@ -1,4 +1,4 @@
-if (!process.env.NODE_ENV) process.env.NODE_ENV = 'dev'
+if (!process.env.NODE_ENV) process.env.NODE_ENV = 'test'
 const saveTestData = require('../seed/test.seed');
 const { expect } = require('chai');
 const app = require('../server');
@@ -45,6 +45,25 @@ describe('Articles', () => {
 				expect(article.title.length).to.be.at.least(1);
 			});
 	});
+	it('"POST /articles/:article_id/comments" creates a new comment under the requested article', () => {
+		const articleId = data.articles[1]._id;
+		const comment = {
+			belongs_to: articleId,
+			body: 'This is a test comment',
+		};
+		return request
+			.post(`/articles/${articleId}/comments`)
+			.send(comment)
+			.expect(201)
+			.then(res => {
+				const newComment = res.body;
+				expect(newComment.body).to.equal(comment.body);
+				expect(newComment.belongs_to).to.equal(`${articleId}`);
+				expect(newComment.created_by).to.equal('northcoder');
+				expect(newComment.votes).to.equal(0);
+			});
+	});
+
 	it('"PUT /articles/:article_id?vote=up" increases the vote count by one', () => {
 		const articleId = data.articles[0]._id;
 		return request

@@ -1,4 +1,4 @@
-if (!process.env.NODE_ENV) process.env.NODE_ENV = 'dev'
+if (!process.env.NODE_ENV) process.env.NODE_ENV = 'test'
 const saveTestData = require('../seed/test.seed');
 const { expect } = require('chai');
 const app = require('../server');
@@ -48,14 +48,13 @@ describe('Topics', () => {
 			belongs_to: topic,
 			title: 'Test article',
 			body: 'This is a test article',
-			created_by: ''
+			created_by: 'northcoder'
 		};
 		return request
 			.post(`/topics/${topic}/articles`)
 			.send(article)
 			.expect(201)
 			.then(res => {
-				console.log(res)
 				const newArticle = res.body;
 				expect(newArticle.title).to.equal(article.title);
 				expect(newArticle.body).to.equal(article.body);

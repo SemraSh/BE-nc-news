@@ -74,27 +74,34 @@ const addNewComment = (req, res, next) => {
 		next(err);
 	}
 
-	else {const checkArticle = (articleId) => {
-		return Articles.findById(articleId)
-			.then(article => {
-				return article ? true : false;
-			});
-	};
-	checkArticle(article_id).then(validated => {
-		if (!validated) {
-			const err = new Error('Article doesn\'t exist');
-			err.status = 400;
-			next(err);
-		} else {
-			const comment = new Comments({
-				body,
-				belongs_to: article_id
-			});
-			comment.save()
-				.then(comment => res.status(201).json(comment))
-				.catch(next);
-		}
-	});
+	else {
+		const checkArticle = (articleId) => {
+			return Articles.findById(articleId)
+				.then(article => {
+					return article ? true : false;
+				});
+		};
+		checkArticle(article_id).then(validated => {
+			if (!validated) {
+				const err = new Error('Article doesn\'t exist');
+				err.status = 400;
+				next(err);
+			} else {
+				const comment = new Comments({
+					body,
+					belongs_to
+				});
+				if (comment.belongs_to + '' !== article_id) {
+					const err = new Error('belongs_to:`article_id` did not match the article id in the url')
+					err.status = 400
+					next(err)
+				} else {
+					comment.save()
+						.then(comment => res.status(201).json(comment))
+				}
+			}
+		}).catch(next);
+
 	}
 };
 

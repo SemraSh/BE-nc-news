@@ -5,7 +5,7 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const db = require('./config').DB[process.env.NODE_ENV] || process.env.DB;
 mongoose.Promise = Promise;
-console.log(db);
+
 mongoose.connect(db)
 	.then(() => console.log('connected to', db))
 

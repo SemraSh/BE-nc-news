@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "mocha ./spec/*",
-    "start": "node index.js"
+    "test": "mocha --exit spec",
+    "start": "nodemon index.js"
   },
   "repository": {
     "type": "git",
