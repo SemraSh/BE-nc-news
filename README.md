@@ -2,7 +2,7 @@
 ### About
 A RESTful API for Northcoders News. Built using Node.js (v8.9.1), Express.js (v4.16.2), MongoDB (v3.4.9) and Mongoose(v5.0.1).
  
-This API has been deployed to Heroku [here](https://nc--news.herokuapp.com/).
+This API has been deployed to Heroku [here](https://nc--news.herokuapp.com/){:target="_blank"}.
 
 Set Up
 
@@ -11,26 +11,26 @@ Check if `node.js` is already installed by typing the following command on your 
 node -v
 ```
 
-> If you do not already have Node.js installed please follow the instructions on [this guide](https://nodejs.org/en/download/package-manager/).
+> If you do not already have Node.js installed please follow the instructions on [this guide](https://nodejs.org/en/download/package-manager/){:target="_blank"}.
 
 Check if `npm` is already installed by typing the following command on your terminal:
 ```
 npm -v
 ```
->If you do not have npm already installed please follow [this guide](https://www.npmjs.com/get-npm) to set it up.
+>If you do not have npm already installed please follow [this guide](https://www.npmjs.com/get-npm){:target="_blank"} to set it up.
 
 Check if `git` is installed on your machine enter the following command on your terminal:
 ```
 git --version
 ```
->If you do not already have git installed on your machine please follow [this guide](https://git-scm.com/).
+>If you do not already have git installed on your machine please follow [this guide](https://git-scm.com/){:target="_blank"}.
 
 Check if `MongoDB` is installed on your machine enter the following command on your terminal:
 ```
 npm list mongoose
 ```
 
->If you do not have `MongoDB` already installed, please follow [this guide](https://docs.mongodb.com/manual/installation/).
+>If you do not have `MongoDB` already installed, please follow [this guide](https://docs.mongodb.com/manual/installation/){:target="_blank"}.
 
 
 ### Installation
@@ -39,7 +39,7 @@ To run this project you will need to clone it onto your local machine and instal
 
 To do so use the command line to navigate to your preferred directory on your local machine and enter the following command on the terminal:
 ```
-git clone https://github.com/SemraSh/BE-nc-news
+git clone this repo --> [https://github.com/SemraSh/BE-nc-news](https://github.com/SemraSh/BE-nc-news){:target="_blank"}
 ```
 Navigate inside the folder and install all dependencies by entering the following command on your terminal window:
 ```
