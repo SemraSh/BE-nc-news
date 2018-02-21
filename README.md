@@ -1,5 +1,5 @@
-##Northcoders News API
-###About
+## Northcoders News API
+### About
 A RESTful API for Northcoders News. Built using Node.js (v8.9.1), Express.js (v4.16.2), MongoDB (v3.4.9) and Mongoose(v5.0.1).
  
 This API has been deployed to Heroku [here](https://nc--news.herokuapp.com/).
@@ -28,7 +28,7 @@ git --version
 If you do not have `MongoDB` already installed, please follow [this guide](https://docs.mongodb.com/manual/installation/).
 
 
-###Installation
+### Installation
 
 To run this project you will need to clone it onto your local machine and install all dependencies.
 
@@ -54,16 +54,16 @@ npm start
 ```
 This will run the server on port 3000. All endpoints can be found locally on http://localhost:3000 .
 
-###Testing
+### Testing
 To test the API navigate to the project directory and enter the following command
 ```
 npm test
 ```
 Testing was carried out using `Mocha`, `Chai` and `Supertest`
 
-###API routes
+### API routes
 
-####GET
+#### GET
 ------
 ```
 /topics
@@ -111,7 +111,7 @@ Get all the comments
 Get one comment by comment id.
 
 
-####POST
+#### POST
 --------
 ```
 /topics/:topic/articles
@@ -124,7 +124,7 @@ Post a new article under the topic
 Post new comment for the article.
 
 
-####PUT
+#### PUT
 -------
 ```
 /articles/:article_id
@@ -137,7 +137,7 @@ Update vote for article.
 Update vote of the comment.
 
 
-####DELETE
+#### DELETE
 ```
 /comments/:comment_id
 ```
