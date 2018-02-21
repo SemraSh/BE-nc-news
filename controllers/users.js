@@ -13,7 +13,7 @@ const getUserByUsername = (req, res, next) => {
 	Users.findOne({ username })
 		.then(user => {
 			if (!user) {
-				const err = new Error(`User doesn't exist`);
+				const err = new Error('User doesn\'t exist');
 				err.status = 400;
 				next(err);
 			} else res.status(200).json(user);

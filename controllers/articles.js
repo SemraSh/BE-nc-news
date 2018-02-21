@@ -92,12 +92,12 @@ const addNewComment = (req, res, next) => {
 					belongs_to
 				});
 				if (comment.belongs_to + '' !== article_id) {
-					const err = new Error('belongs_to:`article_id` did not match the article id in the url')
-					err.status = 400
-					next(err)
+					const err = new Error('belongs_to:`article_id` did not match the article id in the url');
+					err.status = 400;
+					next(err);
 				} else {
 					comment.save()
-						.then(comment => res.status(201).json(comment))
+						.then(comment => res.status(201).json(comment));
 				}
 			}
 		}).catch(next);

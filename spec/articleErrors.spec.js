@@ -1,9 +1,10 @@
-process.env.NODE_ENV = 'test'
+process.env.NODE_ENV = 'test';
 const saveTestData = require('../seed/test.seed');
 const { expect } = require('chai');
 const app = require('../server');
 const request = require('supertest')(app);
 const mongoose = require('mongoose');
+const db = process.env.DB_URL_TEST;
 mongoose.Promise = Promise;
 
 describe('Articles Error Handling', () => {
@@ -23,7 +24,7 @@ describe('Articles Error Handling', () => {
 			.get('/artticles')
 			.expect(404)
 			.then(res => {
-				expect(res.body.error.message).to.equal("Page not found! Invalid Path!");
+				expect(res.body.error.message).to.equal('Page not found! Invalid Path!');
 			});
 	});
 
@@ -72,7 +73,7 @@ describe('Articles Error Handling', () => {
 			body: 'This is a test comment',
 		};
 		return request
-			.post(`/articles/erfnweoirfj8679/comments`)
+			.post('/articles/erfnweoirfj8679/comments')
 			.send(comment)
 			.expect(400)
 			.then(res => {
@@ -109,5 +110,5 @@ describe('Articles Error Handling', () => {
 			.then(res => {
 				expect(res.body.error.message).to.equal('New comment should include the required properties \'belongs_to\', \'body\'');
 			});
-	})
+	});
 });

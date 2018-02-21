@@ -1,9 +1,10 @@
-if (!process.env.NODE_ENV) process.env.NODE_ENV = 'test'
+if (!process.env.NODE_ENV) process.env.NODE_ENV = 'test';
 const saveTestData = require('../seed/test.seed');
 const { expect } = require('chai');
 const app = require('../server');
 const request = require('supertest')(app);
 const mongoose = require('mongoose');
+const db = process.env.DB_URL_TEST;
 mongoose.Promise = Promise;
 
 describe('Articles', () => {

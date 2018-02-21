@@ -1,9 +1,10 @@
-process.env.NODE_ENV = 'test'
+process.env.NODE_ENV = 'test';
 const saveTestData = require('../seed/test.seed');
 const { expect } = require('chai');
 const app = require('../server');
 const request = require('supertest')(app);
 const mongoose = require('mongoose');
+const db = process.env.DB_URL_TEST;
 mongoose.Promise = Promise;
 
 describe('Users Error Handling', () => {
@@ -17,9 +18,9 @@ describe('Users Error Handling', () => {
 				data = savedData;
 				return data;
 			});
-  });
+	});
 
-  after(done => {
+	after(done => {
 		mongoose.disconnect();
 		done();
 	});
@@ -29,7 +30,7 @@ describe('Users Error Handling', () => {
 			.get('/userrs')
 			.expect(404)
 			.then(res => {
-				expect(res.body.error.message).to.equal("Page not found! Invalid Path!");
+				expect(res.body.error.message).to.equal('Page not found! Invalid Path!');
 			});
 	});
 
@@ -38,7 +39,7 @@ describe('Users Error Handling', () => {
 			.get('/users/notvalid')
 			.expect(400)
 			.then(res => {
-				expect(res.body.error.message).to.equal(`User doesn't exist`);
+				expect(res.body.error.message).to.equal('User doesn\'t exist');
 			});
 	});
 

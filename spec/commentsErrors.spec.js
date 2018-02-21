@@ -1,9 +1,10 @@
-process.env.NODE_ENV = 'test'
+process.env.NODE_ENV = 'test';
 const saveTestData = require('../seed/test.seed');
 const { expect } = require('chai');
 const app = require('../server');
 const request = require('supertest')(app);
 const mongoose = require('mongoose');
+const db = process.env.DB_URL_TEST;
 mongoose.Promise = Promise;
 
 describe('Comments Error Handling', () => {
@@ -17,16 +18,16 @@ describe('Comments Error Handling', () => {
 				data = savedData;
 				return data;
 			});
-  });
+	});
   
 	it('"GET /comments" returns error if misstyped', () => {
 		return request
 			.get('/coments')
 			.expect(404)
 			.then(res => {
-				expect(res.body.error.message).to.equal("Page not found! Invalid Path!");
+				expect(res.body.error.message).to.equal('Page not found! Invalid Path!');
 			});
-  });
+	});
 
 
 	it('"GET /comments/:comment_id" returns error if the id is not valid ', () => {
@@ -37,7 +38,7 @@ describe('Comments Error Handling', () => {
 			.then(res => {
 				expect(res.body.error.message).to.equal('Comment id is not valid!');
 			});
-  });
+	});
 
 	it('"PUT /comments/:comment_id?vote=up" returns error if the format of the query is wrong', () => {
 		const commentId = data.comments[0]._id;
@@ -51,7 +52,7 @@ describe('Comments Error Handling', () => {
 
 	it('"DELETE /comments/:comment_id" returns error if comment_id is not valid', ()=>{
 		return request
-			.delete(`/comments/invalidid`)
+			.delete('/comments/invalidid')
 			.expect(400)
 			.then(res => {
 				expect(res.body.error.message).to.equal('Comment id is not valid!');
