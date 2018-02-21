@@ -1,4 +1,4 @@
-if (!process.env.NODE_ENV) process.env.NODE_ENV = 'test';
+process.env.NODE_ENV = 'test';
 const saveTestData = require('../seed/test.seed');
 const { expect } = require('chai');
 const app = require('../server');
