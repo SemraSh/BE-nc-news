@@ -19,10 +19,6 @@ describe('Users', () => {
 				return data;
 			});
 	});
-	after(done => {
-		mongoose.disconnect();
-		done();
-	});
 
 	it('"GET /users" returns all the users', () => {
 		return request
