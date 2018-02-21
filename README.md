@@ -69,7 +69,7 @@ Testing was carried out using `Mocha`, `Chai` and `Supertest`
 ### API routes
 
 #### GET
-------
+=====
 ```
 /topics
 ```
