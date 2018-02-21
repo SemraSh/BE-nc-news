@@ -9,7 +9,9 @@ mongoose.Promise = Promise;
 mongoose.connect(db);
 
 app.use(bodyParser.json());
-app.use('/', router);
+app.route('/')
+	.get((req, res) => res.status(200).sendFile(__dirname + '/index.html'));
+app.use('/api', router);
 app.use((err, req, res, next) => {
 	res.status(err.status || 500).json({ error: { code: err.status, message: err.message } });
 	next();

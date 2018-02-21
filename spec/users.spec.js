@@ -20,9 +20,9 @@ describe('Users', () => {
 			});
 	});
 
-	it('"GET /users" returns all the users', () => {
+	it('"GET /api/users" returns all the users', () => {
 		return request
-			.get('/users')
+			.get('/api/users')
 			.expect(200)
 			.then(res => {
 				const users = res.body;
@@ -31,10 +31,10 @@ describe('Users', () => {
 			});
 	});
 
-	it('"GET /users/:username" returns the user on requested username', () => {
+	it('"GET /api/users/:username" returns the user on requested username', () => {
 		const username = data.user.username;
 		return request
-			.get(`/users/${username}`)
+			.get(`/api/users/${username}`)
 			.expect(200)
 			.then(res => {
 				const user = res.body;

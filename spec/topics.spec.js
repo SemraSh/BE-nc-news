@@ -20,9 +20,9 @@ describe('Topics', () => {
 			});
 	});
 
-	it('"GET /topics" gets all the topics', () => {
+	it('"GET /api/topics" gets all the topics', () => {
 		return request
-			.get('/topics')
+			.get('/api/topics')
 			.expect(200)
 			.then(res => {
 				let topics = res.body;
@@ -30,10 +30,10 @@ describe('Topics', () => {
 				expect(topics.length).to.equal(3);
 			});
 	});
-	it('"GET /topics/:topic/articles/" returns all the articles for one topic', () => {
+	it('"GET /api/topics/:topic/articles/" returns all the articles for one topic', () => {
 		const topic = data.topics[0].slug;
 		return request
-			.get(`/topics/${topic}/articles`)
+			.get(`/api/topics/${topic}/articles`)
 			.expect(200)
 			.then(res => {
 				const articlesByTopic = res.body;
@@ -42,7 +42,7 @@ describe('Topics', () => {
 				expect(Object.keys(articlesByTopic[0]).length).to.equal(6);
 			});
 	});
-	it('"POST /topics/:topic/articles" creates a new article under the requested topic', () => {
+	it('"POST /api/topics/:topic/articles" creates a new article under the requested topic', () => {
 		const topic = data.topics[1].slug;
 		const article = {
 			belongs_to: topic,
@@ -51,7 +51,7 @@ describe('Topics', () => {
 			created_by: 'northcoder'
 		};
 		return request
-			.post(`/topics/${topic}/articles`)
+			.post(`/api/topics/${topic}/articles`)
 			.send(article)
 			.expect(201)
 			.then(res => {

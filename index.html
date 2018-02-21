@@ -31,47 +31,47 @@
   <hr>
   
     <h3>
-      <span>/topics</span>
+      <span>/api/topics</span>
     </h3>
     <small>Get all the topics</small>
 
     <h3>
-      <span>topics/:topic/articles</span>
+      <span>/apitopics/:topic/articles</span>
     </h3>
     <small>Get article by topic name</small>
 
     <h3>
-      <span>/articles?page=1</span>
+      <span>/api/articles?page=1</span>
     </h3>
     <small>Get first 10 articles. Increase the page number by 1 to get the next 10 articles</small>
 
     <h3>
-      <span>/articles/:article_id</span>
+      <span>/api/articles/:article_id</span>
     </h3>
     <small>Get article by article id.</small>
 
     <h3>
-      <span>/articles/:article_id/comments</span>
+      <span>/api/articles/:article_id/comments</span>
     </h3>
     <small>Get all comments for one article.</small>
 
     <h3>
-      <span>/users</span>
+      <span>/api/users</span>
     </h3>
     <small>Get all the users</small>
 
     <h3>
-      <span>/users/:username</span>
+      <span>/api/users/:username</span>
     </h3>
     <small>Get user by user name.</small>
 
     <h3>
-      <span>/comments</span>
+      <span>/api/comments</span>
     </h3>
     <small>Get all the comments</small>
 
     <h3>
-      <span>/comments/:comment_id</span>
+      <span>/api/comments/:comment_id</span>
     </h3>
     <small>Get one comment by comment id.</small>
 
@@ -79,24 +79,24 @@
     <h2>POST </h2>
     <hr>
       <h3>
-        <span>/topics/:topic/articles</span>
+        <span>/api/topics/:topic/articles</span>
       </h3>
       <small>Post a new article under the topic</small>
 
       <h3>
-        <span>/articles/:article_id/comments</span>
+        <span>/api/articles/:article_id/comments</span>
       </h3>
       <small>Post new comment for the article. </small>
 
       <h2>PUT </h2>
       <hr>
       <h3>
-        <span>/articles/:article_id</span>
+        <span>/api/articles/:article_id</span>
       </h3>
       <small>Update vote for article.</small>
 
       <h3>
-        <span>/comments/:comment_id</span>
+        <span>/api/comments/:comment_id</span>
       </h3>
       <small>Update vote of the comment.</small>
 
@@ -104,7 +104,7 @@
       <h2>DELETE</h2>
       <hr>
       <h3>
-        <span>/comments/:comment_id</span>
+        <span>/api/comments/:comment_id</span>
       </h3>
       <small>Delete comment.</small>
 

@@ -19,61 +19,61 @@ describe('Articles Error Handling', () => {
 				return data;
 			});
 	});
-	it('"GET /articles" returns error if misstyped', () => {
+	it('"GET /api/articles" returns error if misstyped', () => {
 		return request
-			.get('/artticles')
+			.get('/api/artticles')
 			.expect(404)
 			.then(res => {
 				expect(res.body.error.message).to.equal('Page not found! Invalid Path!');
 			});
 	});
 
-	it('"GET /articles" returns error if the page is not defined or invalid', () => {
+	it('"GET /api/articles" returns error if the page is not defined or invalid', () => {
 		return request
-			.get('/articles?page1')
+			.get('/api/articles?page1')
 			.expect(400)
 			.then(res => {
 				expect(res.body.error.message).to.equal('Please provide a query in the format \'page=1\'');
 			});
 	});
 
-	it('"GET /articles" returns error if the total page number is lower than requested', () => {
+	it('"GET /api/articles" returns error if the total page number is lower than requested', () => {
 		return request
-			.get('/articles?page=6')
+			.get('/api/articles?page=6')
 			.expect(404)
 			.then(res => {
 				expect(res.body.error.message).to.equal('Not Found!');
 			});
 	});
 
-	it('"GET /articles/:article_id" returns error if the id is not valid ', () => {
+	it('"GET /api/articles/:article_id" returns error if the id is not valid ', () => {
 		const articleId = data.articles[0]._id;
 		return request
-			.get(`/articles/${articleId}1`)
+			.get(`/api/articles/${articleId}1`)
 			.expect(400)
 			.then(res => {
 				expect(res.body.error.message).to.equal('Article id is not valid!');
 			});
 	});
 
-	it('"PUT /articles/:article_id?vote=up" returns error if the format of the query is wrong', () => {
+	it('"PUT /api/articles/:article_id?vote=up" returns error if the format of the query is wrong', () => {
 		const articleId = data.articles[0]._id;
 		return request
-			.put(`/articles/${articleId}?vote=upp`)
+			.put(`/api/articles/${articleId}?vote=upp`)
 			.expect(400)
 			.then(res => {
 				expect(res.body.error.message).to.equal('Please provide a query in the format vote=up or vote=down');
 			});
 	});
 
-	it('"POST /articles/:article_id/comments" returns error if article_id is not valid', () => {
+	it('"POST /api/articles/:article_id/comments" returns error if article_id is not valid', () => {
 		const articleId = data.articles[1]._id;
 		const comment = {
 			belongs_to: articleId,
 			body: 'This is a test comment',
 		};
 		return request
-			.post('/articles/erfnweoirfj8679/comments')
+			.post('/api/articles/erfnweoirfj8679/comments')
 			.send(comment)
 			.expect(400)
 			.then(res => {
@@ -81,14 +81,14 @@ describe('Articles Error Handling', () => {
 			});
 	});
 
-	it('"POST /articles/:article_id/comments" returns error if belongs_to:article_id is not the same article id as in the url', () => {
+	it('"POST /api/articles/:article_id/comments" returns error if belongs_to:article_id is not the same article id as in the url', () => {
 		const articleId = data.articles[1]._id;
 		const comment = {
 			belongs_to: 'isegfaliwuefbai',
 			body: 'This is a test comment',
 		};
 		return request
-			.post(`/articles/${articleId}/comments`)
+			.post(`/api/articles/${articleId}/comments`)
 			.send(comment)
 			.expect(400)
 			.then(res => {
@@ -96,7 +96,7 @@ describe('Articles Error Handling', () => {
 			});
 	});
 
-	it('"POST /articles/:article_id/comments" returns error if the request doensnt have required fields', () => {
+	it('"POST /api/articles/:article_id/comments" returns error if the request doensnt have required fields', () => {
 		const articleId = data.articles[1]._id;
 		const comment = {
 			belongs_to: articleId,
@@ -104,7 +104,7 @@ describe('Articles Error Handling', () => {
 		};
 		// comment.body is empty | falsy value
 		return request
-			.post(`/articles/${articleId}/comments`)
+			.post(`/api/articles/${articleId}/comments`)
 			.send(comment)
 			.expect(400)
 			.then(res => {

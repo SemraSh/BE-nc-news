@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "mocha --exit spec",
+    "test": "mocha spec",
     "start": "nodemon index.js"
   },
   "repository": {

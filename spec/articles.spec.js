@@ -20,9 +20,9 @@ describe('Articles', () => {
 			});
 	});
 
-	it('"GET /articles" returns an array of all topics and status code 200', () => {
+	it('"GET /api/articles" returns an array of all topics and status code 200', () => {
 		return request
-			.get('/articles?page=1')
+			.get('/api/articles?page=1')
 			.expect(200)
 			.then(res => {
 				const articles = res.body.docs;
@@ -32,10 +32,10 @@ describe('Articles', () => {
 			});
 	});
 
-	it('"GET /articles/:article_id" returns an object with values of the requested article and status code 200', () => {
+	it('"GET /api/articles/:article_id" returns an object with values of the requested article and status code 200', () => {
 		const articleId = data.articles[0]._id;
 		return request
-			.get(`/articles/${articleId}`)
+			.get(`/api/articles/${articleId}`)
 			.expect(200)
 			.then(res => {
 				const article = res.body;
@@ -46,14 +46,14 @@ describe('Articles', () => {
 				expect(article.title.length).to.be.at.least(1);
 			});
 	});
-	it('"POST /articles/:article_id/comments" creates a new comment under the requested article', () => {
+	it('"POST /api/articles/:article_id/comments" creates a new comment under the requested article', () => {
 		const articleId = data.articles[1]._id;
 		const comment = {
 			belongs_to: articleId,
 			body: 'This is a test comment',
 		};
 		return request
-			.post(`/articles/${articleId}/comments`)
+			.post(`/api/articles/${articleId}/comments`)
 			.send(comment)
 			.expect(201)
 			.then(res => {
@@ -65,10 +65,10 @@ describe('Articles', () => {
 			});
 	});
 
-	it('"PUT /articles/:article_id?vote=up" increases the vote count by one', () => {
+	it('"PUT /api/articles/:article_id?vote=up" increases the vote count by one', () => {
 		const articleId = data.articles[0]._id;
 		return request
-			.put(`/articles/${articleId}?vote=up`)
+			.put(`/api/articles/${articleId}?vote=up`)
 			.expect(200)
 			.then(res => {
 				const article = res.body;
@@ -76,10 +76,10 @@ describe('Articles', () => {
 				expect(article.votes).to.equal(1);
 			});
 	});
-	it('"PUT /articles/:article_id?vote=down" decreases the vote count by one', () => {
+	it('"PUT /api/articles/:article_id?vote=down" decreases the vote count by one', () => {
 		const articleId = data.articles[1]._id;
 		return request
-			.put(`/articles/${articleId}?vote=down`)
+			.put(`/api/articles/${articleId}?vote=down`)
 			.expect(200)
 			.then(res => {
 				const article = res.body;

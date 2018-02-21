@@ -20,9 +20,9 @@ describe('Comments Error Handling', () => {
 			});
 	});
   
-	it('"GET /comments" returns error if misstyped', () => {
+	it('"GET /api/comments" returns error if misstyped', () => {
 		return request
-			.get('/coments')
+			.get('/api/coments')
 			.expect(404)
 			.then(res => {
 				expect(res.body.error.message).to.equal('Page not found! Invalid Path!');
@@ -30,29 +30,29 @@ describe('Comments Error Handling', () => {
 	});
 
 
-	it('"GET /comments/:comment_id" returns error if the id is not valid ', () => {
+	it('"GET /api/comments/:comment_id" returns error if the id is not valid ', () => {
 		const commentId = data.comments[0]._id;
 		return request
-			.get(`/comments/${commentId}1`)
+			.get(`/api/comments/${commentId}1`)
 			.expect(400)
 			.then(res => {
 				expect(res.body.error.message).to.equal('Comment id is not valid!');
 			});
 	});
 
-	it('"PUT /comments/:comment_id?vote=up" returns error if the format of the query is wrong', () => {
+	it('"PUT /api/comments/:comment_id?vote=up" returns error if the format of the query is wrong', () => {
 		const commentId = data.comments[0]._id;
 		return request
-			.put(`/comments/${commentId}?vote=upp`)
+			.put(`/api/comments/${commentId}?vote=upp`)
 			.expect(400)
 			.then(res => {
 				expect(res.body.error.message).to.equal('Please provide a query in the format vote=up or vote=down');
 			});
 	});
 
-	it('"DELETE /comments/:comment_id" returns error if comment_id is not valid', ()=>{
+	it('"DELETE /api/comments/:comment_id" returns error if comment_id is not valid', ()=>{
 		return request
-			.delete('/comments/invalidid')
+			.delete('/api/comments/invalidid')
 			.expect(400)
 			.then(res => {
 				expect(res.body.error.message).to.equal('Comment id is not valid!');

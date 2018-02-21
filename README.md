@@ -2,7 +2,7 @@
 ### About
 A RESTful API for Northcoders News. Built using Node.js (v8.9.1), Express.js (v4.16.2), MongoDB (v5.6.0) and Mongoose(v5.0.1).
  
-This API has been deployed to Heroku [here](https://nc--news.herokuapp.com/).
+This API has been deployed to Heroku [here](https://nc--news.herokuapp.com/api).
 
 ### Set Up
 
@@ -79,59 +79,59 @@ Testing was carried out using `Mocha`, `Chai` and `Supertest`
 #### GET
 
 ```
-/topics
+/api/topics
 ```
 Get all the topics
 
 ```
-/topics/:topic/articles
+/api/topics/:topic/articles
 ```
 Get article by topic name
 
 ```
-/articles?page=1
+/api/articles?page=1
 ```
 Get first 10 articles. Increase the page number by 1 to get the next 10 articles
 
 ```
-/articles/:article_id
+/api/articles/:article_id
 ```
 Get article by article id.
 
 ```
-/articles/:article_id/comments
+/api/articles/:article_id/comments
 ```
 Get all comments for one article.
 
 ```
-/users
+/api/users
 ```
 Get all the users
 
 ```
-/users/:username
+/api/users/:username
 ```
 Get user by user name.
 
 ```
-/comments
+/api/comments
 ```
 Get all the comments
 
 ```
-/comments/:comment_id
+/api/comments/:comment_id
 ```
 Get one comment by comment id.
 
 -----
 #### POST
 ```
-/topics/:topic/articles
+/api/topics/:topic/articles
 ```
 Post a new article under the topic
 
 ```
-/articles/:article_id/comments
+/api/articles/:article_id/comments
 ```
 Post new comment for the article.
 
@@ -139,19 +139,19 @@ Post new comment for the article.
 -------
 #### PUT
 ```
-/articles/:article_id
+/api/articles/:article_id
 ```
 Update vote for article.
 
 ```
-/comments/:comment_id
+/api/comments/:comment_id
 ```
 Update vote of the comment.
 
 -------
 #### DELETE
 ```
-/comments/:comment_id
+/api/comments/:comment_id
 ```
 Delete comment.
 

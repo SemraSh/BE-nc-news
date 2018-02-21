@@ -25,18 +25,18 @@ describe('Users Error Handling', () => {
 		done();
 	});
 
-	it('"GET /users" returns error if misstyped', () => {
+	it('"GET /api/users" returns error if misstyped', () => {
 		return request
-			.get('/userrs')
+			.get('/api/userrs')
 			.expect(404)
 			.then(res => {
 				expect(res.body.error.message).to.equal('Page not found! Invalid Path!');
 			});
 	});
 
-	it('"GET /users/:username" returns error if the user doesn\'t exist in the database', () => {
+	it('"GET /api/users/:username" returns error if the user doesn\'t exist in the database', () => {
 		return request
-			.get('/users/notvalid')
+			.get('/api/users/notvalid')
 			.expect(400)
 			.then(res => {
 				expect(res.body.error.message).to.equal('User doesn\'t exist');

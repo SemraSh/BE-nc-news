@@ -20,25 +20,25 @@ describe('Topics Error Handling', () => {
 			});
 	});
 
-	it('"GET /topics" returns error if misstyped', () => {
+	it('"GET /api/topics" returns error if misstyped', () => {
 		return request
-			.get('/topic')
+			.get('/api/topic')
 			.expect(404)
 			.then(res => {
 				expect(res.body.error.message).to.equal('Page not found! Invalid Path!');
 			});
 	});
 
-	it('"GET /topics/:topic/articles" returns error if the topic doesn\'t exist in the database', () => {
+	it('"GET /api/topics/:topic/articles" returns error if the topic doesn\'t exist in the database', () => {
 		return request
-			.get('/topics/:notvalid/articles')
+			.get('/api/topics/:notvalid/articles')
 			.expect(400)
 			.then(res => {
 				expect(res.body.error.message).to.equal('Topic doesn\'t exist');
 			});
 	});
 
-	it('"POST /topics/:topic/articles" returns error if required properties are not filled' ,()=>{
+	it('"POST /api/topics/:topic/articles" returns error if required properties are not filled' ,()=>{
 		const topicName = data.topics[0].slug;
 		const article = {
 			belongs_to: topicName,
@@ -47,7 +47,7 @@ describe('Topics Error Handling', () => {
 			created_by: 'northcoder'
 		};
 		return request
-			.post(`/topics/${topicName}/articles`)
+			.post(`/api/topics/${topicName}/articles`)
 			.send(article)
 			.expect(400)
 			.then(res => {
@@ -55,7 +55,7 @@ describe('Topics Error Handling', () => {
 			});
 	});
 
-	it('"POST /topics/:topic/articles" returns error if the topic is not in the database' ,()=>{
+	it('"POST /api/topics/:topic/articles" returns error if the topic is not in the database' ,()=>{
 		const topicName = data.topics[0].slug;
 		const article = {
 			belongs_to: 'doesnt exist',
@@ -64,7 +64,7 @@ describe('Topics Error Handling', () => {
 			created_by: 'northcoder'
 		};
 		return request
-			.post(`/topics/${topicName}/articles`)
+			.post(`/api/topics/${topicName}/articles`)
 			.send(article)
 			.expect(400)
 			.then(res => {
@@ -72,7 +72,7 @@ describe('Topics Error Handling', () => {
 			});
 	});
 
-	it('"POST /topics/:topic/articles" returns error if the user is not in the database' ,()=>{
+	it('"POST /api/topics/:topic/articles" returns error if the user is not in the database' ,()=>{
 		const topicName = data.topics[0].slug;
 		const article = {
 			belongs_to: topicName,
@@ -81,7 +81,7 @@ describe('Topics Error Handling', () => {
 			created_by: 'not in database'
 		};
 		return request
-			.post(`/topics/${topicName}/articles`)
+			.post(`/api/topics/${topicName}/articles`)
 			.send(article)
 			.expect(400)
 			.then(res => {
