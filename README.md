@@ -4,7 +4,7 @@ A RESTful API for Northcoders News. Built using Node.js (v8.9.1), Express.js (v4
  
 This API has been deployed to Heroku [here](https://nc--news.herokuapp.com/).
 
-Set Up
+### Set Up
 
 Check if `node.js` is already installed by typing the following command on your terminal:
 ```
