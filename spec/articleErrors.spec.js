@@ -18,6 +18,14 @@ describe('Articles Error Handling', () => {
 				return data;
 			});
 	});
+	it('"GET /articles" returns error if misstyped', () => {
+		return request
+			.get('/artticles')
+			.expect(404)
+			.then(res => {
+				expect(res.body.error.message).to.equal("Page not found! Invalid Path!");
+			});
+	});
 
 	it('"GET /articles" returns error if the page is not defined or invalid', () => {
 		return request
