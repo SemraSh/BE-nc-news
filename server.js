@@ -8,6 +8,7 @@ mongoose.Promise = Promise;
 
 mongoose.connect(db);
 
+app.use(cors());
 app.use(bodyParser.json());
 app.route('/')
 	.get((req, res) => res.status(200).sendFile(__dirname + '/index.html'));
