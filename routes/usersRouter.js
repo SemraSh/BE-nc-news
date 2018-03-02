@@ -3,6 +3,6 @@ const {getAllUsers, getUserByUsername, getArticlesByUsername} = require('../cont
 
 router.get('/', getAllUsers);
 router.get('/:username', getUserByUsername);
-router.get('/:username/articlses', getArticlesByUsername)
+router.get('/:username/articles', getArticlesByUsername)
 
 module.exports = router;

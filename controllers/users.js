@@ -29,7 +29,7 @@ const getArticlesByUsername = (req, res, next) => {
 				err.status = 400;
 				next(err);
 			} else res.status(200).json(articles);
-		}).catch(next)
+		}).catch(next);
 }
 
 
