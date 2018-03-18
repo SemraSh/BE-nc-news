@@ -105,7 +105,7 @@ const addNewComment = (req, res, next) => {
 	}
 };
 
-deleteArticle = (req, res, next) => {
+const deleteArticle = (req, res, next) => {
 	const { article_id } = req.params;
 	if (!ObjectId.isValid(article_id)) {
 		const err = new Error('Article id is not valid!');
@@ -116,7 +116,7 @@ deleteArticle = (req, res, next) => {
 			.then(() => res.json({ message: `article ${article_id} deleted` }))
 			.catch(next);
 	}
-}
+};
 
 
 

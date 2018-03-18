@@ -30,7 +30,7 @@ const getArticlesByUsername = (req, res, next) => {
 				next(err);
 			} else res.status(200).json(articles);
 		}).catch(next);
-}
+};
 
 
 module.exports = { getAllUsers, getUserByUsername, getArticlesByUsername };

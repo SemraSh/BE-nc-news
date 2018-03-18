@@ -9,7 +9,7 @@ const db = require('./config').DB[process.env.NODE_ENV] || process.env.DB;
 mongoose.Promise = Promise;
 
 mongoose.connect(db)
-	.then(() => console.log('connected to database')).catch(console.error)
+	.then(() => console.log('connected to database')).catch(console.error);
 
 app.use(morgan('dev'));
 app.use(cors());
