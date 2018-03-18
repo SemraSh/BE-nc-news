@@ -105,7 +105,20 @@ const addNewComment = (req, res, next) => {
 	}
 };
 
+deleteArticle = (req, res, next) => {
+	const { article_id } = req.params;
+	if (!ObjectId.isValid(article_id)) {
+		const err = new Error('Article id is not valid!');
+		err.status = 400;
+		next(err);
+	} else {
+		Articles.findByIdAndRemove(article_id)
+			.then(() => res.json({ message: `article ${article_id} deleted` }))
+			.catch(next);
+	}
+}
 
 
 
-module.exports = { getAllArticles, getArticleById, updateVotes, addNewComment };
+
+module.exports = { getAllArticles, getArticleById, updateVotes, addNewComment, deleteArticle };

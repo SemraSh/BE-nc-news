@@ -87,5 +87,14 @@ describe('Articles', () => {
 				expect(article.votes).to.equal(-1);
 			});
 	});
-	
+
+	it('"DELETE /api/articles/:article_id" deletes the specified article', ()=>{
+		const articleId = data.articles[0]._id;
+		return request
+			.delete(`/api/articles/${articleId}`)
+			.expect(200)
+			.then(res => {
+				expect(res.body).to.eql({message: `article ${articleId} deleted`});
+			});
+	}); 
 });
